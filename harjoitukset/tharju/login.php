@@ -11,6 +11,7 @@
     ?>
     <div>Entered username: <?php echo $_POST[ 'username' ]; ?></div>
     <div>Entered password: <?php echo $_POST[ 'password' ]; ?></div>
+
     <?php
     
     } else {
