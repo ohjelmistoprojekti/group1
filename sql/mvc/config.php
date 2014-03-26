@@ -7,7 +7,7 @@ $config = array(
   'mysql'   => array(
   
     'host'      => 'localhost',
-    'user'      => '',
+    'user'      => 'test',
     'pass'      => '',
     'database'  => 'Group1',
     'prefix'    => ''
