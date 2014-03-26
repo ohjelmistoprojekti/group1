@@ -14,7 +14,7 @@ abstract class Controller {
 			
 			$class = ucfirst( strtolower( $model ) ) . 'Model';
 			
-			if( class_exists( $class ) return new $class;
+			if( class_exists( $class ) ) return new $class;
 		
 		}
 		
@@ -59,7 +59,8 @@ abstract class Controller {
 		
 		}
 
-		$method = array_keys( $_CLEAN_GET )[ 0 ];
+		$method = array_keys( $_CLEAN_GET );
+		$method = $method[ 0 ];
 
 		if( isset( $_CLEAN_GET[ $method ] ) && empty( $_CLEAN_GET[ $method ] ) ) {
 

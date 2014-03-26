@@ -8,7 +8,7 @@ abstract class Model {
 	private static $dbConnection;
 	private static $isConnected = false;
 	
-	private is_connected() {
+	private function is_connected() {
 	
 		if( self::$isConnected ) return true;
 		

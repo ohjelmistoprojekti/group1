@@ -14,13 +14,13 @@ include( MVC_PATH . 'base/controller.php' );
 
 function get_app( $app ) {
 
-	$path = $view . '/views.php';
+	$path = MVC_APPS_PATH . "{$app}/controller.php";
 	
 	if( file_exists( $path ) ) {
 		
-		include_once( MVC_APPS_PATH . $path );
+		include_once( $path );
 		
-		$class = ucfirst( strtolower( $view ) ) . 'Controller';
+		$class = ucfirst( strtolower( $app ) ) . 'Controller';
 			
 		if( class_exists( $class ) ) new $class;
 		
