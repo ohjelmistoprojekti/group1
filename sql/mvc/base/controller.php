@@ -57,7 +57,7 @@ abstract class Controller {
 			
 			$request = new Request( $_CLEAN_GET, $_CLEAN_POST );
 			
-			if( !in_array( $method, $allowed ) ) $this->main( $request ); return;
+			if( !in_array( $method, $allowed ) ) { $this->main( $request ); return; }
 			
 			$this->$method( $request );
 

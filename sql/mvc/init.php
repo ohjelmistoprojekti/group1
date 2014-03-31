@@ -1,5 +1,8 @@
 <?php
 
+ini_set( 'display_errors', '1' );
+error_reporting( E_ALL );
+
 session_start();
 
 define( 'IN_MVC', true );
@@ -33,7 +36,7 @@ function get_app( $app ) {
 		include_once( $path );
 		
 		$class = ucfirst( strtolower( $app ) ) . 'Controller';
-			
+		
 		if( class_exists( $class ) ) new $class;
 		
 	}

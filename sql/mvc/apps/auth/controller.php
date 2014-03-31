@@ -35,6 +35,12 @@ class AuthController extends Controller {
 	
 	}
 	
+	public function main( $request ) {
+	
+		$this->login( $request );
+	
+	}
+	
 	public function login( $request ) {
 	
 		$p_login = $request->POST( 'login' );

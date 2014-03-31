@@ -5,6 +5,7 @@ abstract class Model {
 	//Private
 	
 	private $dbTable;
+	private $dbError;
 	private static $dbConnection;
 	private static $isConnected = false;
 	
@@ -54,6 +55,12 @@ abstract class Model {
 	
 	}
 	
+	protected function getConnectError() {
+	
+		return $this->dbError;
+	
+	}
+	
 	//Public
 	
 	public function __construct( $table, $data = '' ) {
@@ -84,7 +91,10 @@ abstract class Model {
 										  $config[ 'mysql' ][ 'pass' ],
 										  $data );
 										  
-		if( !mysqli_connect_error() ) self::$isConnected = true;
+		if( !mysqli_connect_errno() )
+			self::$isConnected = true;
+		else
+			$this->dbError = mysqli_connect_error();
 		
 	}
 	
@@ -104,6 +114,7 @@ abstract class Model {
 final class ModelSelectStatement {
 
 	private $link;
+	private $error;
 	private $statement;
 
 	public function __construct( $link, $table, $select = '*' ) {
@@ -207,6 +218,12 @@ final class ModelSelectStatement {
 	
 	}
 	
+	public function getError() {
+	
+		return $this->error;
+	
+	}
+	
 	public function execute() {
 	
 		$data = array();
@@ -223,6 +240,8 @@ final class ModelSelectStatement {
 		
 		}
 		
+		if( $this->link->errno ) $this->error = $this->link->error;
+		
 		return $data;
 	
 	}
@@ -232,6 +251,7 @@ final class ModelSelectStatement {
 final class ModelInsertStatement {
 
 	private $link;
+	private $error;
 	private $statement;
 
 	public function __construct( $link, $table, array $data ) {
@@ -274,6 +294,12 @@ final class ModelInsertStatement {
 		
 	}
 	
+	public function getError() {
+	
+		return $this->error;
+	
+	}
+	
 	public function execute() {
 	
 		if( $this->link->query( $this->statement ) ) {
@@ -281,6 +307,8 @@ final class ModelInsertStatement {
 			return true;
 		
 		}
+		
+		$this->error = $this->link->error;
 		
 		return false;
 	
@@ -291,6 +319,7 @@ final class ModelInsertStatement {
 final class ModelUpdateStatement {
 
 	private $link;
+	private $error;
 	private $statement;
 	
 	public function __construct( $link, $table, array $data ) {
@@ -350,6 +379,12 @@ final class ModelUpdateStatement {
 	
 	}
 	
+	public function getError() {
+	
+		return $this->error;
+	
+	}
+	
 	public function execute() {
 	
 		if( $this->link->query( $this->statement ) ) {
@@ -357,6 +392,8 @@ final class ModelUpdateStatement {
 			return true;
 		
 		}
+		
+		$this->error = $this->link->error;
 		
 		return false;
 	
@@ -367,6 +404,7 @@ final class ModelUpdateStatement {
 final class ModelDeleteStatement {
 
 	private $link;
+	private $error;
 	private $statement;
 	
 	public function __construct( $link, $table ) {
@@ -400,6 +438,12 @@ final class ModelDeleteStatement {
 	
 	}
 	
+	public function getError() {
+	
+		return $this->error;
+	
+	}
+	
 	public function execute() {
 	
 		echo $this->statement;
@@ -409,6 +453,8 @@ final class ModelDeleteStatement {
 			return true;
 		
 		}
+		
+		$this->error = $this->link->error;
 		
 		return false;
 	
