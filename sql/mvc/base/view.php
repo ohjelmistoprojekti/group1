@@ -27,8 +27,8 @@ class View {
 		
 		global $config;
 		
-		$path = MVC_THEMES_PATH . $config[ 'theme' ] . '/';
-		
+		$path = MVC_THEMES_PATH . $config[ 'theme' ] . '/templates/';
+
 		if( file_exists( $path . $tpl_file ) ) {
 		
 			$this->tplPath = $path;

@@ -6,11 +6,11 @@ abstract class Controller {
 
 	protected function model( $model ) {
 	
-		$path = $model . '/models.php';
+		$path = MVC_APPS_PATH . $model . '/models.php';
 		
 		if( file_exists( $path ) ) {
 		
-			include_once( MVC_APPS_PATH . $path );
+			include_once( $path );
 			
 			$class = ucfirst( strtolower( $model ) ) . 'Model';
 			
@@ -24,25 +24,13 @@ abstract class Controller {
 	
 	protected function view( $view ) {
 	
-		$path = $view . '/views.php';
-	
-		if( file_exists( $path ) ) {
-		
-			include_once( MVC_APPS_PATH . $path );
-		
-			$class = ucfirst( strtolower( $view ) ) . 'View';
-			
-			if( class_exists( $class ) ) return new $class;
-		
-		}
-		
-		return false;
+		return new View( $view );
 	
 	}
 	
 	//Public
 	
-	public function __construct() {
+	public function __construct( array $allowed = array() ) {
 	
 		$_CLEAN_GET = array();
 		$_CLEAN_POST = array();
@@ -60,17 +48,30 @@ abstract class Controller {
 		}
 
 		$method = array_keys( $_CLEAN_GET );
-		$method = $method[ 0 ];
+		$method = isset( $method[ 0 ] ) ? $method[ 0 ] : '';
 
-		if( isset( $_CLEAN_GET[ $method ] ) && empty( $_CLEAN_GET[ $method ] ) ) {
-
+		//Make sure that the method has been set, is empty and exists in the class
+		if( !empty( $method ) && empty( $_CLEAN_GET[ $method ] ) && method_exists( $this, $method ) ) {
+		
 			array_shift( $_CLEAN_GET );
 			
-			$this->$method( array_merge( $_CLEAN_GET, $_CLEAN_POST ) );
+			$request = new Request( $_CLEAN_GET, $_CLEAN_POST );
+			
+			if( !in_array( $method, $allowed ) ) $this->main( $request ); return;
+			
+			$this->$method( $request );
 
+		} else {
+		
+			$request = new Request( $_CLEAN_GET, $_CLEAN_POST );
+		
+			$this->main( $request );
+		
 		}
 	
 	}
+	
+	public function main( $request ) {}
 
 }
 

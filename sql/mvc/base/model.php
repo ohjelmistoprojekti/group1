@@ -63,8 +63,6 @@ abstract class Model {
 		$this->dbTable = $table;
 		
 		if( !empty( $data ) ) {
-		
-			$config[ 'mysql' ][ 'database' ] = $data;
 			
 			if( $this->is_connected() ) {
 
@@ -73,6 +71,10 @@ abstract class Model {
 				
 			}
 		
+		} else {
+		
+			$data = $config[ 'mysql' ][ 'database' ];
+		
 		}
 		
 		if( $this->is_connected() ) return;
@@ -80,7 +82,7 @@ abstract class Model {
 		self::$dbConnection = new mysqli( $config[ 'mysql' ][ 'host' ],
 										  $config[ 'mysql' ][ 'user' ],
 										  $config[ 'mysql' ][ 'pass' ],
-										  $config[ 'mysql' ][ 'database' ] );
+										  $data );
 										  
 		if( !mysqli_connect_error() ) self::$isConnected = true;
 		
@@ -211,7 +213,11 @@ final class ModelSelectStatement {
 	
 		if( $result = $this->link->query( $this->statement ) ) {
 		
-			$data = $result->fetch_array();
+			while( $temp = $result->fetch_array() ) {
+			
+				$data[] = $temp;
+			
+			}
 		
 			$result->close();
 		
