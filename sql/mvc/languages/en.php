@@ -10,9 +10,12 @@ $_LANG = array(
 	'USERS'							=> 'Users',
 	'ASSIGNMENTS'					=> 'Assignments',
 	
-	'ADD_USERS'						=> 'Add Users',
-	'EDIT_USERS'					=> 'Edit Users',
-	'DELETE_USERS'					=> 'Delete Users',
+	'ADD_USER'						=> 'Add user',
+	'ADD_USERS'						=> 'Add users',
+	'EDIT_USERS'					=> 'Edit users',
+	'DELETE_USERS'					=> 'Delete users',
+	'DEFAULT_PASSWORD'				=> 'Default password',
+	'RETYPE_PASSWORD'				=> 'Retype password',
 	
 	'INVALID_USERNAME_OR_PASSWORD'	=> 'Invalid Username Or Password'
 
