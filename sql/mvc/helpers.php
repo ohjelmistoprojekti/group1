@@ -1,6 +1,54 @@
 <?php
 
+class Session {
+	
+	static public function set( $data, $value = '' ) {
+	
+		if( is_array( $data ) ) {
+		
+			$_SESSION = array_merge( $_SESSION, $data );
+		
+		} else {
+		
+			$_SESSION[ $data ] = $value;
+		
+		}
+	
+	}
 
+	static public function get( $data ) {
+	
+		if( is_array( $data ) ) {
+		
+			if( !isset( $data[ 1 ] ) ) {
+			
+				if( isset( $_SESSION[ $data[ 0 ] ] ) ) return $_SESSION[ $data[ 0 ] ];
+				return '';
+			
+			} else {
+			
+				if( isset( $_SESSION[ $data[ 0 ] ] ) ) {
+				
+					array_shift( $data );
+					return $this->get( $data );
+				
+				}
+				
+				return '';
+			
+			}
+		
+		} else {
+	
+			if( isset( $_SESSION[ $data ] ) ) return $_SESSION[ $data ];
+		
+			return '';
+			
+		}
+	
+	}
+
+}
 
 class Request {
 
@@ -48,11 +96,14 @@ function L( $msg ) {
 
 	global $config;
 
-	$path = MVC_LANGUAGES_PATH . $_SESSION[ 'user' ][ 'language' ] . '.php';
+	$lang = Session::get( array( 'user', 'language' ) );
+	$lang = empty( $lang ) ? $config[ 'language' ] : $lang;
+	
+	$path = MVC_LANGUAGES_PATH . "{$lang}.php";
 	
 	if( file_exists( $path ) ) {
 	
-		include( MVC_LANGUAGES_PATH . $_SESSION[ 'user' ][ 'language' ] . '.php' );
+		include( $path );
 
 	} else {
 	

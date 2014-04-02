@@ -103,7 +103,12 @@ class AuthController extends Controller {
 	
 	public function logout( $request ) {
 	
-		if( !$_SESSION[ 'user' ][ 'logged_in' ] ) return;
+		if( !$_SESSION[ 'user' ][ 'logged_in' ] ) {
+		
+			$page_view = $this->view( 'page.tpl' );
+			$page_view->assign( 'content', $this->view( 
+		
+		}
 	
 		$_SESSION[ 'user' ] = array();
 		unset( $_SESSION[ 'user' ] );

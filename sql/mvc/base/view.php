@@ -31,6 +31,10 @@ class View {
 
 		if( file_exists( $path . $tpl_file ) ) {
 		
+			self::$tplVars[ '_JS_URL' ]    = MVC_THEMES_PATH . $config[ 'theme' ] . '/js';
+			self::$tplVars[ '_IMAGE_URL' ] = MVC_THEMES_PATH . $config[ 'theme' ] . '/images';
+			self::$tplVars[ '_STYLE_URL' ] = MVC_THEMES_PATH . $config[ 'theme' ] . '/styles';
+		
 			$this->tplPath = $path;
 			$this->tplFile = $tpl_file;
 		
