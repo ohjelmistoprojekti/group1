@@ -62,7 +62,9 @@ abstract class Model {
 	
 	protected function getError() {
 	
-		return $this->link->error;
+		if( !is_connected() ) return;
+	
+		return $this->dbConnection->error;
 	
 	}
 	

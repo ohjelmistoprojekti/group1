@@ -30,6 +30,56 @@ class AdminController extends Controller {
 		
 		$admin_page->assign( 'user_form', $user_form->get() );
 		$admin_page->assign( 'section_content', $users_page->get() );
+		
+		switch( $request->GET_INDEX( 0 ) ) {
+		
+			case 'add':
+			
+				$email = $request->POST( 'email' );
+				$password = $request->POST( 'password' );
+				$password_again = $request->POST( 'retype_password' );
+				
+				if( empty( $email ) || empty( $password ) || empty( $password_again ) ) {
+				
+					//Some error
+				
+					break;
+				
+				}
+				
+				if( $password != $password_again ) {
+				
+					//Some error;
+				
+					break;
+				
+				}
+			
+				$data = array(
+				
+					'email'		=> $email,
+					'password'	=> $password
+				
+				);
+				
+				$this->model( 'admin' )->insert_user( $data );
+			
+				break;
+			
+			case 'edit':
+			
+				
+			
+				break;
+			
+			case 'delete':
+			
+				
+			
+				break;
+		
+		}
+		
 		$admin_page->render();
 	
 	}

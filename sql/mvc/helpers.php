@@ -89,6 +89,16 @@ class Request {
 		}
 	
 	}
+	
+	public function GET_INDEX( $index ) {
+	
+		$keys = array_keys( $this->GET );
+		
+		if( isset( $keys[ $index ] ) ) return $keys[ $index ];
+		
+		return '';
+	
+	}
 
 }
 
