@@ -2,49 +2,31 @@
 
 class Session {
 	
-	static public function set( $data, $value = '' ) {
-	
-		if( is_array( $data ) ) {
-		
+	static public function set( $data ) {
+
+		if( is_array( $data ) )
 			$_SESSION = array_merge( $_SESSION, $data );
-		
-		} else {
-		
-			$_SESSION[ $data ] = $value;
-		
-		}
+		else
+			return '';
 	
 	}
 
-	static public function get( $data ) {
+	static public function get( $a ) {
 	
-		if( is_array( $data ) ) {
+		$args = func_get_args();
 		
-			if( !isset( $data[ 1 ] ) ) {
-			
-				if( isset( $_SESSION[ $data[ 0 ] ] ) ) return $_SESSION[ $data[ 0 ] ];
+		$data = $_SESSION;
+		
+		foreach( $args as $arg ) {
+		
+			if( isset( $data[ $arg ] ) )
+				$data = $data[ $arg ];
+			else
 				return '';
-			
-			} else {
-			
-				if( isset( $_SESSION[ $data[ 0 ] ] ) ) {
-				
-					array_shift( $data );
-					return $this->get( $data );
-				
-				}
-				
-				return '';
-			
-			}
 		
-		} else {
-	
-			if( isset( $_SESSION[ $data ] ) ) return $_SESSION[ $data ];
-		
-			return '';
-			
 		}
+		
+		return $data;
 	
 	}
 
@@ -64,29 +46,17 @@ class Request {
 	
 	public function POST( $str ) {
 
-		if( isset( $this->POST[ $str ] ) ) {
+		if( isset( $this->POST[ $str ] ) ) return $this->POST[ $str ];
 		
-			return $this->POST[ $str ];
-		
-		} else {
-		
-			return '';
-		
-		}
+		return '';
 	
 	}
 	
 	public function GET( $str ) {
 		
-		if( isset( $this->GET[ $str ] ) ) {
+		if( isset( $this->GET[ $str ] ) ) return $this->GET[ $str ];
 		
-			return $this->GET[ $str ];
-		
-		} else {
-		
-			return '';
-		
-		}
+		return '';
 	
 	}
 	
@@ -106,7 +76,7 @@ function L( $msg ) {
 
 	global $config;
 
-	$lang = Session::get( array( 'user', 'language' ) );
+	$lang = Session::get( 'user', 'language' );
 	$lang = empty( $lang ) ? $config[ 'language' ] : $lang;
 	
 	$path = MVC_LANGUAGES_PATH . "{$lang}.php";
@@ -149,6 +119,12 @@ function get_helpers( $app ) {
 		include_once( $path );
 	
 	}
+
+}
+
+function redirect( $url ) {
+
+	header( 'Location: ' . $url );
 
 }
 

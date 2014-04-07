@@ -42,6 +42,46 @@ class View {
 	
 	}
 	
+	static public function success( $msg ) {
+	
+		$msg_view = new View( 'message.tpl' );
+		$msg_view->assign( 'message_type', 'success' );
+		$msg_view->assign( 'message_content', $msg );
+		
+		return $msg_view;
+	
+	}
+	
+	static public function warning( $msg ) {
+	
+		$msg_view = new View( 'message.tpl' );
+		$msg_view->assign( 'message_type', 'warning' );
+		$msg_view->assign( 'message_content', $msg );
+		
+		return $msg_view;
+	
+	}
+	
+	static public function info( $msg ) {
+	
+		$msg_view = new View( 'message.tpl' );
+		$msg_view->assign( 'message_type', 'info' );
+		$msg_view->assign( 'message_content', $msg );
+		
+		return $msg_view;
+	
+	}
+	
+	static public function error( $msg ) {
+	
+		$msg_view = new View( 'message.tpl' );
+		$msg_view->assign( 'message_type', 'danger' );
+		$msg_view->assign( 'message_content', $msg );
+		
+		return $msg_view;
+	
+	}
+	
 	//Renders directly as HTML
 	public function render() {
 	

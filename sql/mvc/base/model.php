@@ -18,11 +18,14 @@ abstract class Model {
 	
 	//Protected
 	
-	protected function select( $select = '*' ) {
+	protected function select() {
 	
 		if( !$this->is_connected() ) return;
+		
+		$args = func_get_args();
+		$args = empty( $args ) ? '*' : $args;
 	
-		$stmt = new ModelSelectStatement( self::$dbConnection, $this->dbTable, $select );
+		$stmt = new ModelSelectStatement( self::$dbConnection, $this->dbTable, $args );
 		return $stmt;
 	
 	}
@@ -31,16 +34,18 @@ abstract class Model {
 	
 		if( !$this->is_connected() ) return;
 	
-		$stmt = new ModelInsertStatement( self::$dbConnection, $this->dbTable, $data );
+		$stmt = new ModelInsertStatement( self::$dbConnection, $this->dbTable, $args );
 		return $stmt;
 	
 	}
 	
-	protected function update( array $data ) {
+	protected function update( $data ) {
 	
 		if( !$this->is_connected() ) return;
 		
-		$stmt = new ModelUpdateStatement( self::$dbConnection, $this->dbTable, $data );
+		$args = func_get_args();
+		
+		$stmt = new ModelUpdateStatement( self::$dbConnection, $this->dbTable, $args );
 		return $stmt;
 	
 	}
@@ -74,7 +79,8 @@ abstract class Model {
 	
 		global $config;
 		
-		$this->dbTable = $table;
+		$this->dbTable = $config[ 'mysql' ][ 'prefix' ] . $table;
+		
 		
 		if( !empty( $data ) ) {
 			
@@ -123,7 +129,7 @@ final class ModelSelectStatement {
 	private $link;
 	private $statement;
 
-	public function __construct( $link, $table, $select = '*' ) {
+	public function __construct( $link, $table, $select ) {
 	
 		$this->link = $link;
 		$this->statement = 'SELECT ';
@@ -156,7 +162,10 @@ final class ModelSelectStatement {
 		
 	}
 	
-	public function where( $str, array $params ) {
+	public function where( $str, $param ) {
+	
+		$params = func_get_args();
+		array_shift( $params );
 	
 		foreach( $params as $value ) {
 		
@@ -180,7 +189,9 @@ final class ModelSelectStatement {
 	
 	}
 	
-	public function inAscOrderBy( array $params ) {
+	public function inAscOrderBy( $param ) {
+	
+		$params = func_get_args();
 	
 		$is_first = true;
 	
@@ -202,7 +213,9 @@ final class ModelSelectStatement {
 	
 	}
 	
-	public function inDescOrderBy( array $params ) {
+	public function inDescOrderBy( $param ) {
+	
+		$params = func_get_args();
 	
 		$is_first = true;
 	
@@ -343,7 +356,9 @@ final class ModelUpdateStatement {
 		
 	}
 	
-	public function where( $str, array $params ) {
+	public function where( $str, $param ) {
+	
+		$params = func_get_args();
 	
 		foreach( $params as $value ) {
 		
@@ -393,7 +408,9 @@ final class ModelDeleteStatement {
 		
 	}
 	
-	public function where( $str, array $params ) {
+	public function where( $str, $params ) {
+	
+		$params = func_get_args();
 	
 		foreach( $params as $value ) {
 		

@@ -4,9 +4,11 @@ class AdminController extends Controller {
 
 	public function __construct() {
 	
+		get_helpers( 'auth' );
+	
 		parent::__construct( array(
 		
-			'users'
+			admin_required( 'users' )
 		
 		) );
 	

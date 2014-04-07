@@ -8,9 +8,15 @@ class AuthModel extends Model {
 	
 	}
 	
-	public function get_user_data( $user ) {
+	public function get_data_by_id( $id ) {
 	
-		return $this->select()->where( 'username=?', array( $user ) )->execute();
+		return $this->select()->where( 'id=?', $id )->execute();
+	
+	}
+	
+	public function get_data_by_email( $email ) {
+	
+		return $this->select()->where( 'email=?', $email )->execute();
 	
 	}
 
