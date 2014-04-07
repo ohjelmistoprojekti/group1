@@ -9,7 +9,7 @@ function login_required( $str ) {
 
 function admin_required( $str ) {
 
-	if( Session::get( 'user', 'logged_in' ) && Session::get( 'user', 'userlevel' ) == 1 ) return true;
+	if( Session::get( 'user', 'logged_in' ) && Session::get( 'user', 'userlevel' ) == 1 ) return $str;
 	return null;
 
 }

@@ -118,6 +118,8 @@ class AuthController extends Controller {
 		$_SESSION = $temp;
 		
 		$this->reset_session_data();
+		
+		redirect( 'index.php' );
 	
 	}
 	

@@ -8,7 +8,8 @@ class AdminController extends Controller {
 	
 		parent::__construct( array(
 		
-			admin_required( 'users' )
+			admin_required( 'users' ),
+			admin_required( 'groups' )
 		
 		) );
 	
@@ -17,6 +18,43 @@ class AdminController extends Controller {
 	public function main( $request ) {
 	
 		$admin_page = $this->view( 'admin/admin.tpl' );
+		$admin_page->render();
+	
+	}
+	
+	public function groups( $request ) {
+	
+		$admin_page = $this->view( 'admin/admin.tpl' );
+		$groups_page = $this->view( 'admin/groups.tpl' );
+
+		$group_form = $this->view( 'admin/group_form.tpl' );
+		$group_form->assign( 'group_form_type', 'ADD_GROUP' );
+		
+		$admin_page->assign( 'group_form', $group_form->get() );
+		$admin_page->assign( 'section_content', $groups_page->get() );
+		
+		switch( $request->GET_INDEX( 0 ) ) {
+		
+			case 'add':
+			
+				
+			
+				break;
+				
+			case 'edit':
+			
+				
+			
+				break;
+				
+			case 'delete':
+			
+				
+			
+				break;
+		
+		}
+		
 		$admin_page->render();
 	
 	}

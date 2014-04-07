@@ -11,7 +11,14 @@ $_LANG = array(
 	'LASTNAME'						=> 'Last name',
 	
 	'USERS'							=> 'Users',
-	'ASSIGNMENTS'					=> 'Assignments',
+	'GROUPS'						=> 'Groups',
+	'QUESTIONS'						=> 'Questions',
+	
+	'ADD_GROUP'						=> 'Add group',
+	'ADD_GROUPS'					=> 'Add groups',
+	'EDIT_GROUPS'					=> 'Edit groups',
+	'DELETE_GROUPS'					=> 'Delete groups',
+	'GROUP_NAME'					=> 'Group name',
 	
 	'ADD_USER'						=> 'Add user',
 	'ADD_USERS'						=> 'Add users',
