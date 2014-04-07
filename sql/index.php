@@ -8,7 +8,7 @@ if( !Session::get( 'user', 'logged_in' ) ) {
 
 } else {
 
-	switch( Session::get( 'user', 'group' ) ) {
+	switch( Session::get( 'user', 'userlevel' ) ) {
 	
 		default:
 		case 0:
