@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>{{ trans( 'LOGIN' ) }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ _STYLES_PATH }}/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ _STYLES_PATH }}/signin.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <form class="form-signin" action="#" method="post" role="form">
+	    <div class="alert alert-danger"></div>
+		<div class="alert alert-success">{{ LOGGED_OUT }}</div>
+        <h2 class="form-signin-heading">{{ trans( 'SQL_TOOL' ) }}</h2>
+        <input type="email" class="form-control" placeholder="{{ trans( 'EMAIL_ADDRESS' ) }}" name="email" required autofocus>
+        <input type="password" class="form-control" placeholder="{{ trans( 'PASSWORD' ) }}" name="password" required>
+        <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">{{ trans( 'LOGIN' ) }}</button>
+      </form>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="{{ _JS_PATH }}/jquery-1.11.0.min.js"></script>
+	<script src="{{ _JS_PATH }}/bootstrap.min.js"></script>
+	<script>
+	
+		$( function() {
+		
+			$( '.alert-danger' ).hide();
+			if( $( '.alert-success' ).html() == '' ) $( '.alert-success' ).hide();
+		
+			$( '.form-signin' ).submit( function( e ) {
+		
+				e.preventDefault();
+		
+				var a_email		= $( 'input[type="email"]' ).val();
+				var a_password	= $( 'input[type="password"]' ).val();
+				
+				$.post( 'index.php?login', { email : a_email, password : a_password, login : true }, function( data ) {
+
+					data = JSON.parse( data );
+					
+					if( data.warning ) {
+					
+						$( '.alert-danger' ).show();
+						$( '.alert-danger' ).html( "<strong>{{ trans( 'ERROR' ) }}:</strong> " + data.message );
+					
+					} else if( data.success ) {
+					
+						window.location = 'admin.php';
+					
+					}
+				
+				} );
+		
+			} );
+		
+		} );
+	
+	</script>
+  </body>
+</html>

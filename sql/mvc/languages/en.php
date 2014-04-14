@@ -11,6 +11,7 @@ $_LANG = array(
 	'LASTNAME'						=> 'Last name',
 	
 	'USERS'							=> 'Users',
+	'GROUP'							=> 'Group',
 	'GROUPS'						=> 'Groups',
 	'QUESTIONS'						=> 'Questions',
 	

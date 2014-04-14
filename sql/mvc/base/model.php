@@ -34,7 +34,7 @@ abstract class Model {
 	
 		if( !$this->is_connected() ) return;
 	
-		$stmt = new ModelInsertStatement( self::$dbConnection, $this->dbTable, $args );
+		$stmt = new ModelInsertStatement( self::$dbConnection, $this->dbTable, $data );
 		return $stmt;
 	
 	}
@@ -56,20 +56,6 @@ abstract class Model {
 	
 		$stmt = new ModelDeleteStatement( self::$dbConnection, $this->dbTable );
 		return $stmt;
-	
-	}
-	
-	protected function getConnectError() {
-	
-		return mysqli_connect_error();
-	
-	}
-	
-	protected function getError() {
-	
-		if( !is_connected() ) return;
-	
-		return $this->dbConnection->error;
 	
 	}
 	
@@ -119,6 +105,20 @@ abstract class Model {
 			self::$dbConnection->close();
 			
 		}
+	
+	}
+	
+	public function get_connect_error() {
+	
+		return mysqli_connect_error();
+	
+	}
+	
+	public function get_error() {
+	
+		if( !$this->is_connected() ) return;
+	
+		return '<p>' . self::$dbConnection->error . '</p>';
 	
 	}
 	
@@ -274,6 +274,7 @@ final class ModelInsertStatement {
 		$keys = '';
 		$values = '';
 		
+		$i = 0;
 		foreach( $data as $key => $value ) {
 
 			if( get_magic_quotes_gpc() ) {
@@ -293,14 +294,18 @@ final class ModelInsertStatement {
 			
 			}
 			
-			$keys .= $key;
+			$keys .= "`$key`";
 			$values .= $value;
 			
 			$is_first = false;
+			
+			$i++;
 		
 		}
 		
-		$this->statement .= "({$keys}) VALUES({$values})";
+		$count = $i > 1 ? 'VALUES' : 'VALUE';
+		
+		$this->statement .= "({$keys}) {$count}({$values})";
 		
 	}
 	

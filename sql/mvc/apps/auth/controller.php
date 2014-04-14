@@ -51,9 +51,7 @@ class AuthController extends Controller {
 
 		if( Session::get( 'user', 'logged_in' ) ) {
 		
-			$page_view = $this->view( 'login.tpl' );
-			$page_view->assign( 'message', $page_view->warning( L( 'ALREADY_LOGGED_IN' ) )->get() );
-			$page_view->render();
+			echo json_encode( array( 'warning' => true, 'message' => L( 'ALREADY_LOGGED_IN' ) ) );
 		
 			return;
 		
@@ -81,19 +79,13 @@ class AuthController extends Controller {
 				
 				) );
 				
-				redirect( 'index.php' );
+				echo json_encode( array( 'success' => true ) );
 			
 			} else {
-			
-				$page_view = $this->view( 'login.tpl' );
-				$page_view->assign( 'message', $page_view->warning( L( 'INVALID_USERNAME_OR_PASSWORD' ) )->get() );
-				$page_view->render();
+				
+				echo json_encode( array( 'warning' => true, 'message' => L( 'INVALID_USERNAME_OR_PASSWORD' ) ) );
 			
 			}
-		
-		} else {
-		
-			//redirect( 'index.php' );
 		
 		}
 	

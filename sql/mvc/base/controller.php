@@ -6,7 +6,9 @@ abstract class Controller {
 
 	protected function model( $model ) {
 	
-		$path = MVC_APPS_PATH . $model . '/models.php';
+		$folder = strtolower( str_replace( 'Controller', '', get_class( $this ) ) );
+		
+		$path = MVC_APPS_PATH . $folder . '/models.php';
 		
 		if( file_exists( $path ) ) {
 		

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ trans( 'ADMIN' ) }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ _STYLE_PATH }}/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ _STYLE_PATH }}/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">{{ SQL_TOOL }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="#">{{ trans( 'USERS' ) }}</a></li>
+            <li><a href="#">{{ trans( 'GROUPS' ) }}</a></li>
+            <li><a href="#">{{ trans( 'ASSIGNMENTS' ) }}</a></li>
+          </ul>
+		  <ul class="nav nav-sidebar">
+		    <li><a href="index.php?logout">{{ trans( 'LOGOUT' ) }}</a></li>
+		  </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="alert"></div>
+
+          <h2 class="sub-header">Section title</h2>
+		  
+		  {{ SECTION_CONTENT }}
+		  
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ _JS_PATH }}/jquery-1.11.0.min.js"></script>
+    <script src="{{ _JS_PATH }}/bootstrap.min.js"></script>
+    <script>
+	
+	</script>
+  </body>
+</html>
