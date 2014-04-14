@@ -10,10 +10,10 @@
     <title>{{ trans( 'ADMIN' ) }}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ _STYLE_PATH }}/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ _STYLES_PATH }}/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{ _STYLE_PATH }}/dashboard.css" rel="stylesheet">
+    <link href="{{ _STYLES_PATH }}/dashboard.css" rel="stylesheet">
   </head>
 
   <body>
@@ -21,7 +21,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">{{ SQL_TOOL }}</a>
+          <a class="navbar-brand" href="#">{{ trans( 'SQL_TOOL' ) }}</a>
         </div>
       </div>
     </div>
@@ -30,8 +30,8 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="#">{{ trans( 'USERS' ) }}</a></li>
-            <li><a href="#">{{ trans( 'GROUPS' ) }}</a></li>
+            <li><a href="admin.php?users">{{ trans( 'USERS' ) }}</a></li>
+            <li><a href="admin.php?groups">{{ trans( 'GROUPS' ) }}</a></li>
             <li><a href="#">{{ trans( 'ASSIGNMENTS' ) }}</a></li>
           </ul>
 		  <ul class="nav nav-sidebar">
@@ -41,23 +41,26 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
 
-          <div class="alert"></div>
+		  {% if MESSAGE %}
+          <div class="alert alert-{{ MESSAGE_TYPE }}">{{ MESSAGE }}</div>
+		  {% endif %}
 
-          <h2 class="sub-header">Section title</h2>
+          <h2 class="sub-header">{{ SECTION_TITLE }}</h2>
 		  
-		  {{ SECTION_CONTENT }}
+		  {% if SECTION_CONTENT %}
+		    {% include SECTION_CONTENT %}
+		  {% endif %}
 		  
         </div>
       </div>
     </div>
-
+	
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ _JS_PATH }}/jquery-1.11.0.min.js"></script>
     <script src="{{ _JS_PATH }}/bootstrap.min.js"></script>
-    <script>
-	
-	</script>
+	{% import 'admin/users_add_form.html' as add_user %}
+    {{ add_user.script() }}
   </body>
 </html>

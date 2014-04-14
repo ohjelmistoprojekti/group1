@@ -63,6 +63,8 @@ abstract class BaseController {
 				break;
 		
 		}
+		
+		exit;
 	
 	}
 

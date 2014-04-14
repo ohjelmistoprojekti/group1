@@ -1,16 +1,16 @@
 <?php
 
-function admin_required( $url ) {
+function is_admin() {
 
-	if( Session::get( 'user', 'logged_in' ) && Session::get( 'user', 'userlevel' ) == 1 ) return $url;
-	return '';
+	if( Session::get( 'user', 'userlevel' ) == 1 ) return true;
+	return false;
 
 }
 
-function login_required( $url ) {
+function is_logged_in() {
 
-	if( Session::get( 'user', 'logged_in' ) ) return $url;
-	return '';
+	if( Session::get( 'user', 'logged_in' ) ) return true;
+	return false;
 
 }
 

@@ -103,9 +103,11 @@ class AuthController extends BaseController {
 	
 	public function logout() {
 	
+		$login_tpl = $this->get_view( 'auth.html' );
+	
 		if( !Session::get( 'user', 'logged_in' ) ) {
 		
-			//Already logged out
+			$login_tpl->render();
 			return;
 		
 		}
@@ -120,8 +122,6 @@ class AuthController extends BaseController {
 		$_SESSION = $temp;
 		
 		$this->reset();
-		
-		$login_tpl = $this->get_view( 'auth.html' );
 		
 		$login_tpl->assign( 'LOGGED_OUT', trans( 'LOGOUT_SUCCESSFUL' ) );
 		

@@ -18,6 +18,16 @@ include( FW_MODS_PATH . 'base/controller.php' );
 include( FW_MODS_PATH . 'base/models.php' );
 
 function get_mod( $mod ) {
+
+	$path = FW_MODS_PATH . "{$mod}/";
+
+	if( file_exists( $path . 'models.php' ) ) include( $path . 'models.php' );
+	if( file_exists( $path . 'helpers.php' ) ) include( $path . 'helpers.php' );
+	if( file_exists( $path . 'controller.php' ) ) include( $path . 'controller.php' );
+
+}
+
+function run_mod( $mod ) {
 	
 	$path = FW_MODS_PATH . "{$mod}/";
 	

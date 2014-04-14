@@ -4,3 +4,4 @@ config.php
 settings.php
 sql-u/settings.php
 sql-u/framework/settings.php
+sql-u/framework/twig-cache/

@@ -2,6 +2,6 @@
 
 include( 'framework/framework.php' );
 
-get_mod( 'auth' );
+run_mod( 'auth' );
 
 ?>

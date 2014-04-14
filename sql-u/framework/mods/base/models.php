@@ -194,7 +194,7 @@ final class DatabaseSelectStatement {
 	
 		if( $result = $this->db_connection->query( $this->statement ) ) {
 		
-			while( $data[] = $result->fetch_assoc() );
+			while( $temp = $result->fetch_assoc() ) $data[] = $temp;
 			
 			$result->free();
 		
@@ -240,8 +240,8 @@ final class DatabaseInsertStatement {
 			
 			if( !$is_first ) {
 			
-				$key .= ',';
-				$value .= ',';
+				$keys .= ',';
+				$values .= ',';
 			
 			}
 			
@@ -314,8 +314,11 @@ final class DatabaseUpdateStatement {
 		foreach( $args as $arg ) {
 		
 			if( get_magic_quotes_gpc() ) $arg = stripslashes( $arg );
-			
-			$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
+		
+			if( is_string( $arg ) )
+				$str = substr_replace( $str, "'{$arg}'", strpos( $str, '?' ), 1 );
+			else
+				$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
 		
 		}
 		
@@ -360,8 +363,11 @@ final class DatabaseDeleteStatement {
 		foreach( $args as $arg ) {
 		
 			if( get_magic_quotes_gpc() ) $arg = stripslashes( $arg );
-			
-			$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
+		
+			if( is_string( $arg ) )
+				$str = substr_replace( $str, "'{$arg}'", strpos( $str, '?' ), 1 );
+			else
+				$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
 		
 		}
 		
