@@ -70,7 +70,7 @@ class AuthController extends BaseController {
 			
 			}
 			
-			$user_data = $this->get_model( 'auth' )->get_user_by_email( $p_email );
+			$user_data = $this->get_model( 'auth' )->get_user_by( 'email', $p_email );
 			
 			if( $p_password == $user_data[ 0 ][ 'password' ] ) {
 			//if( hash( 'sha256', $p_password ) == $user_data[ 0 ][ 'password' ] ) {

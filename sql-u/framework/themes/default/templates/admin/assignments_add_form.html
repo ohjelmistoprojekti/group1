@@ -1,0 +1,54 @@
+<div class="modal fade" id="assignments-add-form-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{ trans( 'ADD_ASSIGNMENT' ) }}</h4>
+	  </div>
+	  <div class="modal-body">
+	    <form class="form-horizontal" id="assignments-add-form" action="admin.php?assignments&amp;add" role="form" method="post">
+		  <div class="form-group">
+		    <label for="assignment_name" class="col-sm-4 control-label">{{ trans( 'NAME' ) }}</label>
+			<div class="col-sm-8">
+			  <input type="text" class="form-control" id="assignment_name" name="assignment_name" placeholder="{{ trans( 'NAME' ) }}">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="assignment_description" class="col-sm-4 control-label">{{ trans( 'DESCRIPTION' ) }}</label>
+			<div class="col-sm-8">
+			  <textarea style="resize: vertical;" class="form-control" id="assignment_description" name="assignment_description" placeholder="{{ trans( 'DESCRIPTION' ) }}"></textarea>
+			</div>
+		  </div>
+		  <div class="form-group">
+		    <label for="assignment_exanswer" class="col-sm-4 control-label">{{ trans( 'EXAMPLE_ANSWER' ) }}</label>
+			<div class="col-sm-8">
+			  <textarea style="resize: vertical;" class="form-control" id="assignment_exanswer" name="assignment_exanswer" placeholder="{{ trans( 'EXAMPLE_ANSWER' ) }}"></textarea>
+			</div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-4 col-sm-8">
+			  <div class="checkbox">
+			    <label>
+				  <input type="checkbox" class="show_example_answer" name="show_example_answer" checked> {{ trans( 'SHOW_EXAMPLE_ANSWER' ) }}
+				</label>
+			  </div>
+			</div>
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans( 'CLOSE' ) }}</button>
+		<button type="button" id="add-assignment-btn" class="btn btn-primary">{{ trans( 'ADD' ) }}</button>
+	  </div>
+	</div>
+  </div>
+</div>
+{% macro script() %}
+	
+	$( '#add-assignment-btn' ).click( function() {
+	
+		$( '#assignments-add-form' ).submit();
+	
+	} );
+
+{% endmacro %}

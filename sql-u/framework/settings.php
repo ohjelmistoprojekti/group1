@@ -17,8 +17,8 @@ $settings = array(
 	'mysql'		=> array(
 	
 		'host'		=> 'localhost',
-		'user'		=> '',
-		'pass'		=> '',
+		'user'		=> 'tharju',
+		'pass'		=> 'xlG4OpOy',
 		'data'		=> 'Group1',
 		'prefix'	=> ''
 	

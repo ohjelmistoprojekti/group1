@@ -21,7 +21,7 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
     <div class=\"modal-content\">
 \t  <div class=\"modal-header\">
 \t    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
-\t\t<h4 class=\"modal-title\" id=\"users-add-form-modal\">";
+\t\t<h4 class=\"modal-title\">";
         // line 6
         echo twig_escape_filter($this->env, trans("ADD_USERS"), "html", null, true);
         echo "</h4>
@@ -104,7 +104,7 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
         echo twig_escape_filter($this->env, trans("PASSWORD"), "html", null, true);
         echo "</label>
 \t\t\t<div class=\"col-sm-8\">
-\t\t\t  <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"";
+\t\t\t  <input type=\"password\" class=\"form-control\" id=\"a_password\" name=\"password\" placeholder=\"";
         // line 42
         echo twig_escape_filter($this->env, trans("PASSWORD"), "html", null, true);
         echo "\" disabled>
@@ -116,7 +116,7 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
         echo twig_escape_filter($this->env, trans("RETYPE_PASSWORD"), "html", null, true);
         echo "</label>
 \t\t\t<div class=\"col-sm-8\">
-\t\t\t  <input type=\"password\" class=\"form-control\" id=\"retype_password\" name=\"retype_password\" placeholder=\"";
+\t\t\t  <input type=\"password\" class=\"form-control\" id=\"a_retype_password\" name=\"retype_password\" placeholder=\"";
         // line 48
         echo twig_escape_filter($this->env, trans("RETYPE_PASSWORD"), "html", null, true);
         echo "\" disabled>
@@ -126,7 +126,7 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
 \t\t    <div class=\"col-sm-offset-4 col-sm-8\">
 \t\t\t  <div class=\"checkbox\">
 \t\t\t    <label>
-\t\t\t\t  <input type=\"checkbox\" id=\"generate_password\" value=\"1\" name=\"generate_password\" checked> ";
+\t\t\t\t  <input type=\"checkbox\" class=\"generate_password\" name=\"generate_password\" checked> ";
         // line 55
         echo twig_escape_filter($this->env, trans("GENERATE_PASSWORD"), "html", null, true);
         echo "
@@ -166,21 +166,18 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
         ob_start();
         try {
             // line 71
-            echo "<script>
+            echo "
+\t\$( '#users-add-form-modal .generate_password' ).change( function() {
 
-\$( function() {
-
-\t\$( '#generate_password' ).change( function() {
-\t
 \t\tif( \$( this ).prop( 'checked' ) ) {
 \t\t
-\t\t\t\$( '#password' ).prop( 'disabled', true );
-\t\t\t\$( '#retype_password' ).prop( 'disabled', true );
+\t\t\t\$( '#users-add-form-modal #a_password' ).prop( 'disabled', true );
+\t\t\t\$( '#users-add-form-modal #a_retype_password' ).prop( 'disabled', true );
 \t\t
 \t\t} else {
 \t\t
-\t\t\t\$( '#password' ).prop( 'disabled', false );
-\t\t\t\$( '#retype_password' ).prop( 'disabled', false );
+\t\t\t\$( '#users-add-form-modal #a_password' ).prop( 'disabled', false );
+\t\t\t\$( '#users-add-form-modal #a_retype_password' ).prop( 'disabled', false );
 \t\t
 \t\t}
 \t
@@ -192,9 +189,6 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
 \t
 \t} );
 
-} );
-
-</script>
 ";
         } catch (Exception $e) {
             ob_end_clean();
@@ -217,6 +211,6 @@ class __TwigTemplate_a4c7ca9f96247bed16b5a4fceb7ed4a4c912985f6dae287e97806283a92
 
     public function getDebugInfo()
     {
-        return array (  169 => 71,  160 => 70,  150 => 65,  146 => 64,  142 => 63,  131 => 55,  121 => 48,  116 => 46,  109 => 42,  104 => 40,  97 => 36,  92 => 34,  85 => 30,  80 => 28,  73 => 24,  68 => 22,  62 => 18,  49 => 16,  44 => 15,  40 => 14,  34 => 11,  26 => 6,  39 => 9,  37 => 8,  31 => 5,  27 => 4,  23 => 3,  145 => 64,  143 => 63,  138 => 62,  133 => 61,  123 => 53,  120 => 52,  115 => 51,  112 => 50,  106 => 48,  103 => 47,  93 => 45,  90 => 44,  81 => 38,  75 => 35,  71 => 34,  67 => 33,  55 => 24,  43 => 16,  36 => 13,  30 => 10,  19 => 1,);
+        return array (  169 => 71,  160 => 70,  150 => 65,  146 => 64,  142 => 63,  131 => 55,  121 => 48,  116 => 46,  109 => 42,  104 => 40,  97 => 36,  92 => 34,  85 => 30,  80 => 28,  73 => 24,  68 => 22,  62 => 18,  49 => 16,  44 => 15,  40 => 14,  34 => 11,  26 => 6,  19 => 1,);
     }
 }

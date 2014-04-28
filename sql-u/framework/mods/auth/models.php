@@ -8,9 +8,13 @@ class AuthModel extends BaseModel {
 	
 	}
 	
-	public function get_user_by_email( $email ) {
+	public function get_user_by( $field, $value ) {
 	
-		return $this->select()->where( 'email=?', $email )->execute();
+		if( is_string( $value ) ) {
+			return $this->select()->where( "?='?'", $field, $value )->execute();
+		} else {
+			return $this->select()->where( "?=?", $field, $value )->execute();
+		}
 	
 	}
 

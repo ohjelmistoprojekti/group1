@@ -70,7 +70,7 @@ class __TwigTemplate_68576bc702654c32231daf49de9d4633688aa7fc0b88fd9d819bf1ef191
         // line 34
         echo twig_escape_filter($this->env, trans("GROUPS"), "html", null, true);
         echo "</a></li>
-            <li><a href=\"#\">";
+            <li><a href=\"admin.php?assignments\">";
         // line 35
         echo twig_escape_filter($this->env, trans("ASSIGNMENTS"), "html", null, true);
         echo "</a></li>
@@ -138,14 +138,99 @@ class __TwigTemplate_68576bc702654c32231daf49de9d4633688aa7fc0b88fd9d819bf1ef191
         if (isset($context["_JS_PATH"])) { $__JS_PATH_ = $context["_JS_PATH"]; } else { $__JS_PATH_ = null; }
         echo twig_escape_filter($this->env, $__JS_PATH_, "html", null, true);
         echo "/bootstrap.min.js\"></script>
+\t<script>
+\t\$( function() {
 \t";
-        // line 63
-        $context["add_user"] = $this->env->loadTemplate("admin/users_add_form.html");
-        // line 64
-        echo "    ";
-        if (isset($context["add_user"])) { $_add_user_ = $context["add_user"]; } else { $_add_user_ = null; }
-        echo $_add_user_->getscript();
-        echo "
+        // line 65
+        if (isset($context["in_user_management"])) { $_in_user_management_ = $context["in_user_management"]; } else { $_in_user_management_ = null; }
+        if (isset($context["in_group_management"])) { $_in_group_management_ = $context["in_group_management"]; } else { $_in_group_management_ = null; }
+        if (isset($context["in_assignment_management"])) { $_in_assignment_management_ = $context["in_assignment_management"]; } else { $_in_assignment_management_ = null; }
+        if ($_in_user_management_) {
+            // line 66
+            echo "\t\t";
+            $context["add_user_form"] = $this->env->loadTemplate("admin/users_add_form.html");
+            // line 67
+            echo "\t\t";
+            $context["edit_user_form"] = $this->env->loadTemplate("admin/users_edit_form.html");
+            // line 68
+            echo "\t\t";
+            $context["edit_user_list"] = $this->env->loadTemplate("admin/users_edit_list.html");
+            // line 69
+            echo "\t\t";
+            $context["delete_user_list"] = $this->env->loadTemplate("admin/users_delete_list.html");
+            // line 70
+            echo "\t\t";
+            if (isset($context["add_user_form"])) { $_add_user_form_ = $context["add_user_form"]; } else { $_add_user_form_ = null; }
+            echo $_add_user_form_->getscript();
+            echo "
+\t\t";
+            // line 71
+            if (isset($context["edit_user_form"])) { $_edit_user_form_ = $context["edit_user_form"]; } else { $_edit_user_form_ = null; }
+            if (isset($context["show_edit_form"])) { $_show_edit_form_ = $context["show_edit_form"]; } else { $_show_edit_form_ = null; }
+            echo $_edit_user_form_->getscript($_show_edit_form_);
+            echo "
+\t\t";
+            // line 72
+            if (isset($context["edit_user_list"])) { $_edit_user_list_ = $context["edit_user_list"]; } else { $_edit_user_list_ = null; }
+            echo $_edit_user_list_->getscript();
+            echo "
+\t\t";
+            // line 73
+            if (isset($context["delete_user_list"])) { $_delete_user_list_ = $context["delete_user_list"]; } else { $_delete_user_list_ = null; }
+            echo $_delete_user_list_->getscript();
+            echo "
+\t";
+        } elseif ($_in_group_management_) {
+            // line 75
+            echo "\t\t";
+            $context["add_group_form"] = $this->env->loadTemplate("admin/groups_add_form.html");
+            // line 76
+            echo "\t\t";
+            $context["edit_group_form"] = $this->env->loadTemplate("admin/groups_edit_form.html");
+            // line 77
+            echo "\t\t";
+            $context["edit_group_list"] = $this->env->loadTemplate("admin/groups_edit_list.html");
+            // line 78
+            echo "\t\t";
+            $context["delete_group_list"] = $this->env->loadTemplate("admin/groups_delete_list.html");
+            // line 79
+            echo "\t\t";
+            if (isset($context["add_group_form"])) { $_add_group_form_ = $context["add_group_form"]; } else { $_add_group_form_ = null; }
+            echo $_add_group_form_->getscript();
+            echo "
+\t\t";
+            // line 80
+            if (isset($context["edit_group_form"])) { $_edit_group_form_ = $context["edit_group_form"]; } else { $_edit_group_form_ = null; }
+            if (isset($context["show_edit_form"])) { $_show_edit_form_ = $context["show_edit_form"]; } else { $_show_edit_form_ = null; }
+            echo $_edit_group_form_->getscript($_show_edit_form_);
+            echo "
+\t\t";
+            // line 81
+            if (isset($context["edit_group_list"])) { $_edit_group_list_ = $context["edit_group_list"]; } else { $_edit_group_list_ = null; }
+            echo $_edit_group_list_->getscript();
+            echo "
+\t\t";
+            // line 82
+            if (isset($context["delete_group_list"])) { $_delete_group_list_ = $context["delete_group_list"]; } else { $_delete_group_list_ = null; }
+            echo $_delete_group_list_->getscript();
+            echo "
+\t";
+        } elseif ($_in_assignment_management_) {
+            // line 84
+            echo "\t\t";
+            $context["add_assignment_form"] = $this->env->loadTemplate("admin/assignments_add_form.html");
+            // line 85
+            echo "\t\t
+\t\t";
+            // line 86
+            if (isset($context["add_assignment_form"])) { $_add_assignment_form_ = $context["add_assignment_form"]; } else { $_add_assignment_form_ = null; }
+            echo $_add_assignment_form_->getscript();
+            echo "
+\t";
+        }
+        // line 88
+        echo "\t} );
+\t</script>
   </body>
 </html>
 ";
@@ -163,6 +248,6 @@ class __TwigTemplate_68576bc702654c32231daf49de9d4633688aa7fc0b88fd9d819bf1ef191
 
     public function getDebugInfo()
     {
-        return array (  145 => 64,  143 => 63,  138 => 62,  133 => 61,  123 => 53,  120 => 52,  115 => 51,  112 => 50,  106 => 48,  103 => 47,  93 => 45,  90 => 44,  81 => 38,  75 => 35,  71 => 34,  67 => 33,  55 => 24,  43 => 16,  36 => 13,  30 => 10,  19 => 1,);
+        return array (  232 => 88,  226 => 86,  223 => 85,  220 => 84,  214 => 82,  209 => 81,  203 => 80,  197 => 79,  194 => 78,  191 => 77,  188 => 76,  185 => 75,  179 => 73,  174 => 72,  168 => 71,  162 => 70,  159 => 69,  156 => 68,  153 => 67,  150 => 66,  145 => 65,  138 => 62,  133 => 61,  123 => 53,  120 => 52,  115 => 51,  112 => 50,  106 => 48,  103 => 47,  93 => 45,  90 => 44,  81 => 38,  75 => 35,  71 => 34,  67 => 33,  55 => 24,  43 => 16,  36 => 13,  30 => 10,  19 => 1,);
     }
 }

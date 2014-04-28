@@ -136,10 +136,7 @@ final class DatabaseSelectStatement {
 		
 			if( get_magic_quotes_gpc() ) $arg = stripslashes( $arg );
 		
-			if( is_string( $arg ) )
-				$str = substr_replace( $str, "'{$arg}'", strpos( $str, '?' ), 1 );
-			else
-				$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
+			$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
 		
 		}
 		
@@ -281,6 +278,7 @@ final class DatabaseUpdateStatement {
 		
 		$this->statement = "UPDATE `{$table}` SET ";
 		
+		$is_first = true;
 		foreach( $data as $key => $value ) {
 		
 			$is_string = is_string( $value );
@@ -296,7 +294,7 @@ final class DatabaseUpdateStatement {
 			$value = $this->db_connection->real_escape_string( $value );
 			
 			if( $is_string ) $value = "'{$value}'";
-			if( $is_first ) $this->statement .= ',';
+			if( !$is_first ) $this->statement .= ',';
 			
 			$this->statement .= "{$key}={$value}";
 			
@@ -315,15 +313,12 @@ final class DatabaseUpdateStatement {
 		
 			if( get_magic_quotes_gpc() ) $arg = stripslashes( $arg );
 		
-			if( is_string( $arg ) )
-				$str = substr_replace( $str, "'{$arg}'", strpos( $str, '?' ), 1 );
-			else
-				$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
+			$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
 		
 		}
 		
 		$this->statement .= "WHERE {$str} ";
-		
+
 		return $this;
 	
 	}
@@ -364,10 +359,7 @@ final class DatabaseDeleteStatement {
 		
 			if( get_magic_quotes_gpc() ) $arg = stripslashes( $arg );
 		
-			if( is_string( $arg ) )
-				$str = substr_replace( $str, "'{$arg}'", strpos( $str, '?' ), 1 );
-			else
-				$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
+			$str = substr_replace( $str, $arg, strpos( $str, '?' ), 1 );
 		
 		}
 		

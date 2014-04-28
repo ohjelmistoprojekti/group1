@@ -32,7 +32,7 @@
           <ul class="nav nav-sidebar">
             <li><a href="admin.php?users">{{ trans( 'USERS' ) }}</a></li>
             <li><a href="admin.php?groups">{{ trans( 'GROUPS' ) }}</a></li>
-            <li><a href="#">{{ trans( 'ASSIGNMENTS' ) }}</a></li>
+            <li><a href="admin.php?assignments">{{ trans( 'ASSIGNMENTS' ) }}</a></li>
           </ul>
 		  <ul class="nav nav-sidebar">
 		    <li><a href="index.php?logout">{{ trans( 'LOGOUT' ) }}</a></li>
@@ -60,7 +60,32 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ _JS_PATH }}/jquery-1.11.0.min.js"></script>
     <script src="{{ _JS_PATH }}/bootstrap.min.js"></script>
-	{% import 'admin/users_add_form.html' as add_user %}
-    {{ add_user.script() }}
+	<script>
+	$( function() {
+	{% if in_user_management %}
+		{% import 'admin/users_add_form.html' as add_user_form %}
+		{% import 'admin/users_edit_form.html' as edit_user_form %}
+		{% import 'admin/users_edit_list.html' as edit_user_list %}
+		{% import 'admin/users_delete_list.html' as delete_user_list %}
+		{{ add_user_form.script() }}
+		{{ edit_user_form.script( show_edit_form ) }}
+		{{ edit_user_list.script() }}
+		{{ delete_user_list.script() }}
+	{% elseif in_group_management %}
+		{% import 'admin/groups_add_form.html' as add_group_form %}
+		{% import 'admin/groups_edit_form.html' as edit_group_form %}
+		{% import 'admin/groups_edit_list.html' as edit_group_list %}
+		{% import 'admin/groups_delete_list.html' as delete_group_list %}
+		{{ add_group_form.script() }}
+		{{ edit_group_form.script( show_edit_form ) }}
+		{{ edit_group_list.script() }}
+		{{ delete_group_list.script() }}
+	{% elseif in_assignment_management %}
+		{% import 'admin/assignments_add_form.html' as add_assignment_form %}
+		
+		{{ add_assignment_form.script() }}
+	{% endif %}
+	} );
+	</script>
   </body>
 </html>
