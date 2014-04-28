@@ -48,10 +48,11 @@ $_LANG = array(
 	'GROUPS'						=> 'Groups',
 	'ASSIGNMENTS'					=> 'Assignments',
 	
-	'USERS_ADDED_SUCCESSFULLY'		=> 'Users added successfully',
+	'USER_ADDED_SUCCESSFULLY'		=> 'User added successfully',
 	'USER_EDITED_SUCCESSFULLY'		=> 'User edited successfully',
 	'USERS_DELETED_SUCCESSFULLY'	=> 'Users deleted successfully',
 	'USER_MANAGEMENT'				=> 'User management',
+	'USER_ALREADY_EXISTS'			=> 'User already exists',
 	'ADD_USERS'						=> 'Add users',
 	'EDIT_USERS'					=> 'Edit users',
 	'EDIT_USER'						=> 'Edit user',
