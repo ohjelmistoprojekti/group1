@@ -2,6 +2,8 @@
 
 $config = array(
 
+	'language'	=> 'en',
+
 	'theme'		=> 'default',
 	
 	'mysql'		=> array(
